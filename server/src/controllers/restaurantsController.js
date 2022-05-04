@@ -1,7 +1,7 @@
 const { response } = require('express');
 const express = require('express');
 const router = express.Router();
-const {convertAdressToCoordoninate, haversineGreatCircleDistance} = require('../functions.js');
+const { convertAdressToCoordoninate, haversineGreatCircleDistance } = require('../functions.js');
 const Restaurant = require('../models/Restaurant.js');
 
 router.post('/', (req, res) => {
@@ -13,26 +13,25 @@ router.post('/', (req, res) => {
     let message = [];
 
     // On vérifie que le client nous a bien renseigné une adresse
-    if (adress != null) {   
+    if (adress != null) {
         convertAdressToCoordoninate(adress).then(response => {
+            let latFrom = response.latitude;
+            let lonFrom = response.longitude;
+
+            /* TROUVEZ  UN MOYEN DE RECUPERER LES CATEGORIES SANS PUSH DANS LE BODY DES DOUBLONS ET ENCODER EN JSON*/
             Restaurant.getRestaurants().then(restaurants => {
                 let body = [];
 
                 for (let i = 0; i < restaurants.length; i++) {
-                    let latFrom = response.latitude;
-                    let lonFrom = response.longitude;
                     let latTo = restaurants[i].latitude;
                     let lonTo = restaurants[i].longitude;
 
-                    // On vérifie si le restaurant est dans le rayon demandé
                     if (haversineGreatCircleDistance(latFrom, lonFrom, latTo, lonTo) < radius) {
                         if (categories.length > 0) {
-                            let restaurant = new Restaurant();
 
-                            restaurant.setIdRestaurant(restaurant[i].id);
                         }
                         else {
-                            
+                            body.push(restaurants[i]);
                         }
                     }
                 }

@@ -114,13 +114,13 @@ class Restaurant {
 
     async getRestaurantCategories() {
         let sql = "SELECT * FROM categories LEFT JOIN restaurants_categories as rc ON categories.id = rc.categoryId LEFT JOIN restaurants as r ON rc.restaurantId = r.id WHERE r.id = ?;"
-        const [rows, fields] = await Db.query(sql, [this.getIdRestaurant]);
+        const [rows, fields] = await Db.query(sql, [this.getIdRestaurant()]);
         return rows;
     }
 
     async getRestaurantCountry() {
         let sql = "SELECT * FROM `countries` WHERE id = ?;"
-        const [rows, fields] = await Db.query(sql, [this.getCountryId]);
+        const [rows, fields] = await Db.query(sql, [this.getCountryId()]);
         return rows;
     }
 }
