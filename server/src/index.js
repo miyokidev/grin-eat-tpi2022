@@ -1,6 +1,7 @@
 const express = require('express');
 const categories = require('./controllers/categoriesController.js');
-//const signUp = require('./controllers/signUpController.js');
+const restaurants = require('./controllers/restaurantsController.js');
+const menu_items = require('./controllers/menu_itemsController.js');
 
 const app = express()
 const port = process.env.PORT;
@@ -16,7 +17,8 @@ app.use(express.json());
 
 app.get('/', (req, res) => { res.status(200).json("Welcome to the API") });
 app.use('/categories', categories);
-//app.use('/restaurants', signUp);
+app.use('/restaurants', restaurants);
+app.use('/menu-items', menu_items);
 
 app.listen(port, () => {
     console.log("App listening at http://localhost:" + port)
