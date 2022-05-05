@@ -1,0 +1,7 @@
+#Turn Rewrite Engine On
+RewriteEngine On
+
+#Rewrite URL
+RewriteRule ^(.*)/(.*)/(.*)$ index.php?endpoint=$1&id=$2&context=$3 [QSA,L]
+RewriteRule ^(.*)/(.*)$ index.php?endpoint=$1&id=$2 [QSA,L]
+RewriteRule ^(.*)$ index.php?endpoint=$1 [QSA,L]
