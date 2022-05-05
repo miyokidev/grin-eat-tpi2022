@@ -112,8 +112,8 @@ class Restaurant {
         return rows;
     }
 
-    async getRestaurantCategories() {
-        let sql = "SELECT * FROM categories LEFT JOIN restaurants_categories as rc ON categories.id = rc.categoryId LEFT JOIN restaurants as r ON rc.restaurantId = r.id WHERE r.id = ?;"
+    async getRestaurantCategoriesFR() {
+        let sql = "SELECT nameFrench FROM categories LEFT JOIN restaurants_categories as rc ON categories.id = rc.categoryId LEFT JOIN restaurants as r ON rc.restaurantId = r.id WHERE r.id = ?;"
         const [rows, fields] = await Db.query(sql, [this.getIdRestaurant()]);
         return rows;
     }

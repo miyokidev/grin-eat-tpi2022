@@ -10,6 +10,7 @@ router.post('/', (req, res) => {
     let name = req.body.name || null; // filtre par nom si le client souhaite faire une recherche.
     let categories = req.body.categories || []; // filtre par catégorie si le client en séléctionne.
 
+    let restaurants = [];
     let message = [];
 
     // On vérifie que le client nous a bien renseigné une adresse
@@ -18,25 +19,52 @@ router.post('/', (req, res) => {
             let latFrom = response.latitude;
             let lonFrom = response.longitude;
 
-            /* TROUVEZ  UN MOYEN DE RECUPERER LES CATEGORIES SANS PUSH DANS LE BODY DES DOUBLONS ET ENCODER EN JSON*/
             Restaurant.getRestaurants().then(restaurants => {
-                let body = [];
+                // On crée une promesse pour récupérer les catégories de tout les restaurants 
+                new Promise((resolve) => {
+                    for (let i = 0; i < restaurants.length; i++) {
+                        restaurants[i].categories = [];
+                        let restaurant = new Restaurant();
 
-                for (let i = 0; i < restaurants.length; i++) {
-                    let latTo = restaurants[i].latitude;
-                    let lonTo = restaurants[i].longitude;
+                        restaurant.setIdRestaurant(restaurants[i].id);
 
-                    if (haversineGreatCircleDistance(latFrom, lonFrom, latTo, lonTo) < radius) {
-                        if (categories.length > 0) {
+                        restaurant.getRestaurantCategoriesFR().then(categories => {
+                            for (let j = 0; j < categories.length; j++) {
+                                restaurants[i].categories.push(categories[j].nameFrench || null);
+                            }
 
-                        }
-                        else {
-                            body.push(restaurants[i]);
+                            if (i == restaurants.length - 1) {
+                                resolve(restaurants);
+                            }
+                        });
+                    }
+                }).then(restaurants => {
+                    let body = [];
+
+                    for (let i = 0; i < restaurants.length; i++) {
+                        let latTo = restaurants[i].latitude;
+                        let lonTo = restaurants[i].longitude;
+
+                        // On vérifie si le restaurant actuel (restaurants[i]) est dans le rayon demandé 
+                        if (haversineGreatCircleDistance(latFrom, lonFrom, latTo, lonTo) < radius) {
+                            // On vérifie ensuite si le client souhaite filtrer par des catégories
+                            if (categories.length > 0) {
+                                for (let j = 0; j < categories.length; j++) {
+                                    // On vérifie si le restaurant actuel contient une des catégories par lesquels on souhaite filtrer et si le restaurant
+                                    // n'est pas déjà ajouté dans le corps de notre réponse.
+                                    if (restaurants[i].categories.includes(categories[j]) && !body.includes(restaurants[i])) {
+                                        body.push(restaurants[i]);
+                                    }
+                                }
+                            }
+                            else {
+                                body.push(restaurants[i]);
+                            }
                         }
                     }
-                }
 
-                res.status(200).json(body);
+                    res.status(200).json(body);
+                });
             });
         }).catch(error => {
             message.push("Adresse invalide");
