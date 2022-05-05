@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost
--- Généré le : mar. 03 mai 2022 à 15:36
--- Version du serveur : 10.3.32-MariaDB-0ubuntu0.20.04.1
--- Version de PHP : 7.4.3
+-- Host: localhost
+-- Generation Time: May 05, 2022 at 02:03 PM
+-- Server version: 10.7.3-MariaDB
+-- PHP Version: 7.4.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,15 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `db_grineat`
+-- Database: `db_grineat`
 --
+CREATE DATABASE IF NOT EXISTS `db_grineat` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `db_grineat`;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `categories`
+-- Table structure for table `categories`
 --
 
 CREATE TABLE `categories` (
@@ -34,19 +36,20 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `categories`
+-- Dumping data for table `categories`
 --
 
 INSERT INTO `categories` (`id`, `nameEnglish`, `nameFrench`) VALUES
 (1, 'Fast food', 'Restauration rapide'),
-(2, 'Italian', 'Italienne'),
+(2, 'Italian', 'Italien'),
 (3, 'Thai', 'Thaïlandais'),
-(4, 'Asian', 'Asiatique');
+(4, 'Asian', 'Asiatique'),
+(5, 'American', 'Américain');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `countries`
+-- Table structure for table `countries`
 --
 
 CREATE TABLE `countries` (
@@ -56,7 +59,7 @@ CREATE TABLE `countries` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `countries`
+-- Dumping data for table `countries`
 --
 
 INSERT INTO `countries` (`id`, `nameEnglish`, `nameFrench`) VALUES
@@ -314,30 +317,38 @@ INSERT INTO `countries` (`id`, `nameEnglish`, `nameFrench`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `menu_items`
+-- Table structure for table `menu_items`
 --
 
 CREATE TABLE `menu_items` (
   `id` bigint(20) NOT NULL,
   `restaurantId` bigint(20) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `description` varchar(300) NOT NULL,
+  `description` varchar(500) NOT NULL,
   `image` varchar(300) NOT NULL,
-  `price` decimal(10,0) NOT NULL
+  `price` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `menu_items`
+--
+
+INSERT INTO `menu_items` (`id`, `restaurantId`, `name`, `description`, `image`, `price`) VALUES
+(2, 1, 'Big Mac', 'Le burger le plus légendaire du monde est désormais encore meilleur. De la viande de bœuf bien juteuse de la boucherie Bell, de la salade croquante et du fromage fondu, dans un petit pain fabriqué avec de la farine de qualité IP-Suisse. Le tout rehaussé de la mystérieuse sauce Big Mac. Es-tu à la hauteur de son goût ?', 'http://grineat-api.tchoupi.ch/images/bigmac.jpg', '7.20'),
+(3, 1, '6 Chicken McNuggets', 'Entièrement faites de poitrine de poulet assaisonnée, les Poulet McCroquettes sont toujours tout simplement délicieuses, sans arômes ni colorants artificiels, ni agents de conservation.', 'http://grineat-api.tchoupi.ch/images/6nuggets.jpg', '6.80');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `restaurants`
+-- Table structure for table `restaurants`
 --
 
 CREATE TABLE `restaurants` (
   `id` bigint(20) NOT NULL,
   `createdOn` datetime NOT NULL DEFAULT current_timestamp(),
-  `email` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
   `name` varchar(200) NOT NULL,
-  `phone` varchar(50) NOT NULL,
+  `phone` varchar(50) DEFAULT NULL,
   `website` varchar(300) DEFAULT NULL,
   `image` varchar(300) NOT NULL,
   `street` varchar(300) NOT NULL,
@@ -349,16 +360,17 @@ CREATE TABLE `restaurants` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `restaurants`
+-- Dumping data for table `restaurants`
 --
 
 INSERT INTO `restaurants` (`id`, `createdOn`, `email`, `name`, `phone`, `website`, `image`, `street`, `cp`, `city`, `countryId`, `latitude`, `longitude`) VALUES
-(1, '2022-05-03 15:29:30', 'support.mcdonalds@stuart.com', 'McDonald’s Restaurant', '022 796 88 00', NULL, 'https://lh5.googleusercontent.com/p/AF1QipMHX9lRpMskD-cAPt2PUVN-jsED8q5u9NLMkmib=w80-h106-k-no', 'Rte du Bois-des-Frères 40', '1219', 'Le Lignon', 179, '46.2059684', '6.0987860');
+(1, '2022-05-03 15:29:30', 'support.mcdonalds@stuart.com', 'McDonald’s', '022 796 88 00', NULL, 'https://lh5.googleusercontent.com/p/AF1QipMHX9lRpMskD-cAPt2PUVN-jsED8q5u9NLMkmib=w80-h106-k-no', 'Rte du Bois-des-Frères 40', '1219', 'Le Lignon', 179, '46.2059684', '6.0987860'),
+(2, '2022-05-04 22:33:48', NULL, 'Le Tilleul', '022 752 66 70', 'http://www.letilleul.ch/home.html', 'https://lh5.googleusercontent.com/p/AF1QipN0PwXFMHuV1Fdty1q8glnKpyJ4WLtpf06mCK5y=w80-h142-k-no', 'Rte de La-Repentance 86', '1252', ' Meinier', 179, '46.2479151', '6.2323470');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `restaurants_categories`
+-- Table structure for table `restaurants_categories`
 --
 
 CREATE TABLE `restaurants_categories` (
@@ -367,46 +379,47 @@ CREATE TABLE `restaurants_categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `restaurants_categories`
+-- Dumping data for table `restaurants_categories`
 --
 
 INSERT INTO `restaurants_categories` (`restaurantId`, `categoryId`) VALUES
-(1, 1);
+(1, 1),
+(1, 5);
 
 --
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `categories`
+-- Indexes for table `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`nameEnglish`);
 
 --
--- Index pour la table `countries`
+-- Indexes for table `countries`
 --
 ALTER TABLE `countries`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`nameEnglish`);
 
 --
--- Index pour la table `menu_items`
+-- Indexes for table `menu_items`
 --
 ALTER TABLE `menu_items`
   ADD PRIMARY KEY (`id`),
   ADD KEY `restaurantId` (`restaurantId`);
 
 --
--- Index pour la table `restaurants`
+-- Indexes for table `restaurants`
 --
 ALTER TABLE `restaurants`
   ADD PRIMARY KEY (`id`),
   ADD KEY `idCountry` (`countryId`);
 
 --
--- Index pour la table `restaurants_categories`
+-- Indexes for table `restaurants_categories`
 --
 ALTER TABLE `restaurants_categories`
   ADD PRIMARY KEY (`restaurantId`,`categoryId`),
@@ -414,51 +427,51 @@ ALTER TABLE `restaurants_categories`
   ADD KEY `categoryId` (`categoryId`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `categories`
+-- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT pour la table `countries`
+-- AUTO_INCREMENT for table `countries`
 --
 ALTER TABLE `countries`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=501;
 
 --
--- AUTO_INCREMENT pour la table `menu_items`
+-- AUTO_INCREMENT for table `menu_items`
 --
 ALTER TABLE `menu_items`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT pour la table `restaurants`
+-- AUTO_INCREMENT for table `restaurants`
 --
 ALTER TABLE `restaurants`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Contraintes pour les tables déchargées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `menu_items`
+-- Constraints for table `menu_items`
 --
 ALTER TABLE `menu_items`
   ADD CONSTRAINT `menu_items_ibfk_1` FOREIGN KEY (`restaurantId`) REFERENCES `restaurants` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `restaurants`
+-- Constraints for table `restaurants`
 --
 ALTER TABLE `restaurants`
   ADD CONSTRAINT `restaurants_ibfk_1` FOREIGN KEY (`countryId`) REFERENCES `countries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `restaurants_categories`
+-- Constraints for table `restaurants_categories`
 --
 ALTER TABLE `restaurants_categories`
   ADD CONSTRAINT `restaurants_categories_ibfk_1` FOREIGN KEY (`restaurantId`) REFERENCES `restaurants` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
