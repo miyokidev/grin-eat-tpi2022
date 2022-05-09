@@ -22,10 +22,10 @@ switch ($api) {
                     $lonFrom = $info["longitude"]; // longitude de l'adresse du client
 
                     $restaurants = Restaurant::findAll();
-                    
-                    foreach($restaurants as $r) {
+
+                    foreach ($restaurants as $r) {
                         // On cherche les catégories de chaque restaurant et les ajoutes à la propriété categories de l'objet Restaurant
-                        foreach($r->findCategoriesById() as $c) {
+                        foreach ($r->findCategoriesById() as $c) {
                             $r->addCategory($c->getId());
                         }
 
