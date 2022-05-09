@@ -64,7 +64,7 @@ class Category implements JsonSerializable {
         return $this;
     }
 
-    public function jsonSerialize(): mixed
+    public function jsonSerialize()
     {
         return get_object_vars($this);
     }
