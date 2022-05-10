@@ -9,7 +9,7 @@ switch ($api) {
 
         if ($data != null) {
             $address = $data["address"] ?? null; // adresse du client.
-            $radius = $data["radius"] ?? 5; // rayon limite autour de l'adresse du client par défaut 5 si rien spécifié.
+            $radius = intval($data["radius"]) != null ? intval($data["radius"]) : 5; // rayon limite autour de l'adresse du client par défaut 5 si rien spécifié.
             $name = $data["name"] ?? null; // filtre par nom si le client souhaite faire une recherche
             $categories = $data["categories"] ?? array(); // filtre par catégorie si le client en sélectionne
 

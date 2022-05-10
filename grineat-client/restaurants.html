@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 
 <head>
     <meta charset="UTF-8">
@@ -19,21 +19,45 @@
 </head>
 
 <body class="d-flex h-100 text-center text-white bg-success">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-        <header class="mb-auto">
+    <div class="d-flex w-100 h-100 mx-auto flex-column">
+        <header class="header-container shadow-sm p-2 mb-auto w-100">
             <div>
-                <h3 class="float-md-start mb-0">Grin<strong>Eat</strong></h3>
-                <p id="idAddress" class="address-display">address</p>
+                <h3 id="idLogo" class="logo float-md-start mb-0">Grin<strong>Eat</strong></h3>
             </div>
+            <p id="idAddress" class="address-display">address</p>
         </header>
 
-        <main class="px-3">
-            
+        <div class="tools-container">
+            <input id="idSearchName" type="text" class="" onchange="">
+            <select id="idSelectCategory" onchange="categoryChanged(); changed()">
+                <option value=""></option>
+            </select>
+            <div id="idSelectRadius" class="select-editable">
+                <select id="select" onchange="this.nextElementSibling.value=this.value; changed();">
+                    <option value="1 km">1 km</option>
+                    <option value="3 km">3 km</option>
+                    <option value="5 km">5 km</option>
+                    <option value="8 km">8 km</option>
+                    <option value="10 km">10 km</option>
+                    <option value="20 km">20 km</option>
+                </select>
+                <input id="test" type="text" name="format" value="5 km" onchange="changed();" />
+            </div>
+        </div>
+
+        <main class="main-container">
+            <div class="list-container h-100">
+                <div id="idListDisplay"></div>
+            </div>
+
+            <div class="map-container">
+                <div id="map" class="h-100"></div>
+            </div>
         </main>
 
-        <footer class="mt-auto text-white-50">
-            <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a
-                    href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>
+        <footer class="footer-container mt-auto text-white-50 p-4">
+            <p>&copy; 2022 GrinEat, developped by <a href="https://github.com/miyokidev"
+                    class="text-white">@miyokidev</a>.</p>
         </footer>
     </div>
     <script src="js/restaurants.js"></script>
