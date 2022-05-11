@@ -8,6 +8,7 @@ let restaurants = []; // Tableau des restaurants récupérés du serveur
 let categories = []; // Tableau des catégories récupérés du serveur
 let map;
 let markers;
+let test;
 
 var iconHome = L.icon({
     iconUrl: './assets/images/home.png',
@@ -30,6 +31,7 @@ addEventListener("DOMContentLoaded", () => {
         addressDisplay.innerText = address.text;
 
         map = L.map('map').setView([address.latitude, address.longitude], 15); // Map centrée sur l'adresse de l'utilisateur
+        markers = L.featureGroup().addTo(map); // Groupe de marqueurs
 
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWl5b2tpIiwiYSI6ImNsMW96ejJ5NTAzMjQza3B0NHB3bHMxYncifQ.03AlBHWNd8MiauuZz_sSNQ', {
             maxZoom: 18,
@@ -76,17 +78,28 @@ logo.addEventListener("click", () => {
 
 searchName.addEventListener("keyup", () => {
     search.name = searchName.value;
-    console.log(search);
     changed();
 });
 
 async function sendData(successCallBack, link, obj) {
     fetch(link, { method: 'POST', body: JSON.stringify(obj) }).then(function (response) {
         response.json().then(function (myJson) {
-            restaurants = myJson.result;
-            successCallBack();
+            //console.log(restaurants);
+            //console.log(myJson.result);  
+            if (JSON.stringify(restaurants) != JSON.stringify(myJson.result)) {
+                // Pour supprimer les marqueurs
+                map.removeLayer(markers);
+                // Pour supprimer les restaurants de la liste
+                document.getElementById("idListDisplay").innerHTML = "";
+                restaurants = myJson.result;
+                successCallBack();
+            }
         });
     });
+}
+
+function arraysAreEqual(ary1, ary2) {
+    return (ary1.join('') == ary2.join(''));
 }
 
 function display() {
@@ -99,10 +112,10 @@ function display() {
         addToListDisplay(restaurants[j]);
 
         // Créer le marqueur et l'ajouter au groupe de marqueurs
-        L.marker([restaurants[j].latitude, restaurants[j].longitude], {icon: iconRestaurant}).addTo(markers);
+        L.marker([restaurants[j].latitude, restaurants[j].longitude], { icon: iconRestaurant }).addTo(markers);
     }
 
-    map.flyToBounds(markers.getBounds(), { duration : 1});
+    map.flyToBounds(markers.getBounds(), { duration: 1 });
 }
 
 function addToListDisplay(restaurant) {
@@ -143,10 +156,6 @@ function radiusChanged() {
 }
 
 function changed() {
-    // Pour supprimer les marqueurs
-    map.removeLayer(markers);
-    // Pour supprimer les restaurants de la liste
-    document.getElementById("idListDisplay").innerHTML = "";
     sendData(display, "http://localhost/grin-eat-tpi2022/grineat-api/restaurants", search);
 }
 
