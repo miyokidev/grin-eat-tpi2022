@@ -60,3 +60,9 @@ function haversineGreatCircleDistance(
         cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
     return $angle * $earthRadius;
 }
+
+function compareDistance($a, $b) {
+    $distanceA = $a->getDistanceFrom();
+    $distanceB = $b->getDistanceFrom();
+    return ($distanceA < $distanceB) ? -1 : 1;
+}

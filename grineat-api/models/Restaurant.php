@@ -14,6 +14,7 @@ class Restaurant implements JsonSerializable {
     private $latitude;
     private $longitude;
     private $categories = array();
+    private $distanceFrom;
 
     /**
      * Get the value of id
@@ -303,6 +304,26 @@ class Restaurant implements JsonSerializable {
     public function addCategory($category)
     {
         array_push($this->categories, $category);
+
+        return $this;
+    }
+
+    /**
+     * Get the value of distanceFrom
+     */ 
+    public function getDistanceFrom()
+    {
+        return $this->distanceFrom;
+    }
+
+    /**
+     * Set the value of distanceFrom
+     *
+     * @return  self
+     */ 
+    public function setDistanceFrom($distanceFrom)
+    {
+        $this->distanceFrom = $distanceFrom;
 
         return $this;
     }

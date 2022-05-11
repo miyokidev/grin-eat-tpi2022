@@ -32,16 +32,16 @@
             <select id="idSelectCategory" onchange="categoryChanged(); changed()">
                 <option value=""></option>
             </select>
-            <div id="idSelectRadius" class="select-editable">
-                <select id="select" onchange="this.nextElementSibling.value=this.value; changed();">
+            <div class="select-editable">
+                <select id="idSelectRadius" onchange="this.nextElementSibling.value=this.value; radiusChanged(); changed();">
                     <option value="1 km">1 km</option>
                     <option value="3 km">3 km</option>
-                    <option value="5 km">5 km</option>
+                    <option value="5 km" selected>5 km</option>
                     <option value="8 km">8 km</option>
                     <option value="10 km">10 km</option>
                     <option value="20 km">20 km</option>
                 </select>
-                <input id="test" type="text" name="format" value="5 km" onchange="changed();" />
+                <input id="idInputRadius" type="text" name="format" value="5 km" onchange="radiusChanged(); changed();" />
             </div>
         </div>
 

@@ -33,18 +33,28 @@ switch ($api) {
                         $lonTo = $r->getLongitude(); // longitude du restaurant actuel
 
                         // On vérifie si le restaurant actuel est dans le rayon demandé
-                        if (haversineGreatCircleDistance($latFrom, $lonFrom, $latTo, $lonTo) < $radius) {
+                        $r->setDistanceFrom(haversineGreatCircleDistance($latFrom, $lonFrom, $latTo, $lonTo));
+                        if ($r->getDistanceFrom() < $radius) {
                             // On vérifie ensuite si le client souhaite filtrer par des catégories
                             if (count($categories) > 0) {
                                 // On vérifie si le restaurant actuel contient au moins une des catégories demandés par le client
-                                if (count(array_intersect($r->getCategories(), $categories)) > 0) {
-                                    array_push($body, $r);
+                                if (count(array_intersect($r->getCategories(), $categories)) < 1) {
+                                    continue; // On passe au restaurant suivant
                                 }
-                            } else {
-                                array_push($body, $r);
                             }
+
+                            // On vérifie si le client souhaite filtrer par un nom
+                            if ($name != null) {
+                                // On vérifie si le restaurant actuel commence par la saisie du client
+                                if (strpos(strtolower($r->getName()), strtolower($name)) !== 0) {
+                                    continue; // On passe au restaurant suivant
+                                }
+                            }
+
+                            array_push($body, $r);
                         }
                     }
+                    usort($body, "compareDistance");
 
                     array_push($message, "success");
                     http_response_code(200);
