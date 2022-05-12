@@ -98,10 +98,6 @@ async function sendData(successCallBack, link, obj) {
     });
 }
 
-function arraysAreEqual(ary1, ary2) {
-    return (ary1.join('') == ary2.join(''));
-}
-
 function display() {
     // Placer les marqueurs et remplir la liste de restaurants affichée.
     markers = L.featureGroup().addTo(map); // Groupe de marqueurs
@@ -115,7 +111,7 @@ function display() {
         L.marker([restaurants[j].latitude, restaurants[j].longitude], { icon: iconRestaurant }).addTo(markers);
     }
 
-    map.flyToBounds(markers.getBounds(), { duration: 1 });
+    map.flyToBounds(markers.getBounds().pad(0.1), { duration: 1 });
 }
 
 function addToListDisplay(restaurant) {
