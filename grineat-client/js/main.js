@@ -4,26 +4,43 @@ const geocoder = new MapboxGeocoder({
     types: 'address'
 });
 
-const searchBar = document.getElementById('idSearchBar');
+const searchBarContainer = document.getElementById('idSearchBarContainer');
 const btnSearch = document.getElementById('idBtnSearch');
 const logo = document.getElementById('idLogo');
-let address;
+let address = {};
 
-geocoder.addTo('#idSearchBar');
+addEventListener("DOMContentLoaded", () => {
+    btnSearch.disabled = true;
+});
+
+geocoder.addTo('#idSearchBarContainer');
 
 geocoder.on('result', (e) => {
-    address = {};
-    address.latitude = e.result.center[1];
-    address.longitude = e.result.center[0];
+    address.coords = {latitude : e.result.center[1], longitude : e.result.center[0]};
     address.text = e.result.place_name;
 });
 
 btnSearch.addEventListener("click", () => {
-    if (address != null) {
-        sessionStorage.setItem('address', JSON.stringify(address));
-        location.href = "restaurants.html";
+    if (Object.keys(address).length !== 0) {
+        if (address.coords != null) {
+            sessionStorage.setItem('address', JSON.stringify(address));
+            location.href = "restaurants.html";
+        }
     } else {
         alert("Adresse invalide");
+    }
+});
+
+searchBarContainer.addEventListener('keyup', () => {
+    var searchBar = document.getElementsByClassName("mapboxgl-ctrl-geocoder--input")[0];
+
+    address.coords = null;
+    address.text = searchBar.value;
+
+    if (searchBar.value === "") {
+        btnSearch.disabled = true;
+    } else {
+        btnSearch.disabled = false;
     }
 });
 

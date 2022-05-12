@@ -30,7 +30,7 @@ addEventListener("DOMContentLoaded", () => {
         address = JSON.parse(sessionStorage.getItem('address'));
         addressDisplay.innerText = address.text;
 
-        map = L.map('map').setView([address.latitude, address.longitude], 15); // Map centrée sur l'adresse de l'utilisateur
+        map = L.map('map').setView([address.coords.latitude, address.coords.longitude], 15); // Map centrée sur l'adresse de l'utilisateur
         markers = L.featureGroup().addTo(map); // Groupe de marqueurs
 
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWl5b2tpIiwiYSI6ImNsMW96ejJ5NTAzMjQza3B0NHB3bHMxYncifQ.03AlBHWNd8MiauuZz_sSNQ', {
@@ -102,7 +102,7 @@ function display() {
     // Placer les marqueurs et remplir la liste de restaurants affichée.
     markers = L.featureGroup().addTo(map); // Groupe de marqueurs
     // On ajoute un marqueur à l'adresse de l'utilisateur
-    L.marker([address.latitude, address.longitude], { icon: iconHome }).addTo(markers);
+    L.marker([address.coords.latitude, address.coords.longitude], { icon: iconHome }).addTo(markers);
     for (let j = 0; j < restaurants.length; j++) {
         // Remplir la liste
         addToListDisplay(restaurants[j]);

@@ -2,7 +2,6 @@
 
 function convertAdressToCoordinate($adress)
 {
-    /*
     $encoded = rawurlencode($adress);
     $result = array();
 
@@ -30,14 +29,15 @@ function convertAdressToCoordinate($adress)
 
 
     return $result;
-    */
 
+    /*
     $result = array();
 
     $result["adress"] = "Quai Capo D'istria 9, 1205 Genève, Switzerland";
     $result["latitude"] = 46.187687;
     $result["longitude"] = 6.143453;
     return $result;
+    */
 }
 
 function haversineGreatCircleDistance(
