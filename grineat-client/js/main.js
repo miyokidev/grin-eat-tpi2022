@@ -16,16 +16,14 @@ addEventListener("DOMContentLoaded", () => {
 geocoder.addTo('#idSearchBarContainer');
 
 geocoder.on('result', (e) => {
-    address.coords = {latitude : e.result.center[1], longitude : e.result.center[0]};
-    address.text = e.result.place_name;
+    address.coordinates = {latitude : e.result.center[1], longitude : e.result.center[0]};
+    address.street = e.result.place_name;
 });
 
 btnSearch.addEventListener("click", () => {
     if (Object.keys(address).length !== 0) {
-        if (address.coords != null) {
-            sessionStorage.setItem('address', JSON.stringify(address));
-            location.href = "restaurants.html";
-        }
+        sessionStorage.setItem('address', JSON.stringify(address));
+        location.href = "restaurants.html";
     } else {
         alert("Adresse invalide");
     }
@@ -34,8 +32,8 @@ btnSearch.addEventListener("click", () => {
 searchBarContainer.addEventListener('keyup', () => {
     var searchBar = document.getElementsByClassName("mapboxgl-ctrl-geocoder--input")[0];
 
-    address.coords = null;
-    address.text = searchBar.value;
+    address.coordinates = null;
+    address.street = searchBar.value;
 
     if (searchBar.value === "") {
         btnSearch.disabled = true;

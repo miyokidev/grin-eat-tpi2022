@@ -8,7 +8,6 @@ let restaurants = []; // Tableau des restaurants récupérés du serveur
 let categories = []; // Tableau des catégories récupérés du serveur
 let map;
 let markers;
-let test;
 
 var iconHome = L.icon({
     iconUrl: './assets/images/home.png',
@@ -28,17 +27,7 @@ addEventListener("DOMContentLoaded", () => {
         location.href = "index.html";
     } else {
         address = JSON.parse(sessionStorage.getItem('address'));
-        addressDisplay.innerText = address.text;
-
-        map = L.map('map').setView([address.coords.latitude, address.coords.longitude], 15); // Map centrée sur l'adresse de l'utilisateur
-        markers = L.featureGroup().addTo(map); // Groupe de marqueurs
-
-        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWl5b2tpIiwiYSI6ImNsMW96ejJ5NTAzMjQza3B0NHB3bHMxYncifQ.03AlBHWNd8MiauuZz_sSNQ', {
-            maxZoom: 18,
-            id: 'mapbox/streets-v11',
-            tileSize: 512,
-            zoomOffset: -1,
-        }).addTo(map);
+        console.log(address);
 
         new Promise((resolve, reject) => {
             fetch('http://localhost/grin-eat-tpi2022/grineat-api/categories')
@@ -60,7 +49,13 @@ addEventListener("DOMContentLoaded", () => {
                     reject(ex);
                 })
         }).then(() => {
-            search.address = address.text;
+            search.address = address.street;
+            if (address.coordinates != null) {
+                if (address.coordinates.latitude != null && address.coordinates.longitude != null) {
+                    search.coordinates = address.coordinates;
+                }
+            }
+            radiusChanged();
             sendData(display, "http://localhost/grin-eat-tpi2022/grineat-api/restaurants", search);
         });
     }
@@ -68,11 +63,12 @@ addEventListener("DOMContentLoaded", () => {
 
 // Afficher un modal pour modifier son adresse quand on clique sur l'adresse.
 addressDisplay.addEventListener("click", () => {
-    flyToMarker(address);
+    flyToMarker(address.coordinates);
 });
 
 // Rediriger vers l'index si on clique sur le logo.
 logo.addEventListener("click", () => {
+    sessionStorage.removeItem('address');
     location.href = "index.html";
 });
 
@@ -84,14 +80,28 @@ searchName.addEventListener("keyup", () => {
 async function sendData(successCallBack, link, obj) {
     fetch(link, { method: 'POST', body: JSON.stringify(obj) }).then(function (response) {
         response.json().then(function (myJson) {
-            //console.log(restaurants);
-            //console.log(myJson.result);  
-            if (JSON.stringify(restaurants) != JSON.stringify(myJson.result)) {
-                // Pour supprimer les marqueurs
-                map.removeLayer(markers);
+            if (JSON.stringify(restaurants) != JSON.stringify(myJson.result.restaurants) || restaurants.length == 0) {
+                restaurants = myJson.result.restaurants;
+                if (address != myJson.result.address) {
+                    address = myJson.result.address;
+                    sessionStorage.setItem('address', JSON.stringify(address));
+                }
+                if (map == null) {
+                    map = L.map('map').setView([address.coordinates.latitude, address.coordinates.longitude], 15); // Map centrée sur l'adresse de l'utilisateur
+
+                    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWl5b2tpIiwiYSI6ImNsMW96ejJ5NTAzMjQza3B0NHB3bHMxYncifQ.03AlBHWNd8MiauuZz_sSNQ', {
+                        maxZoom: 18,
+                        id: 'mapbox/streets-v11',
+                        tileSize: 512,
+                        zoomOffset: -1,
+                    }).addTo(map);
+                } else {
+                    // Pour supprimer les marqueurs
+                    map.removeLayer(markers);
+                }
                 // Pour supprimer les restaurants de la liste
                 document.getElementById("idListDisplay").innerHTML = "";
-                restaurants = myJson.result;
+                addressDisplay.innerText = address.street != null ? address.street : "";
                 successCallBack();
             }
         });
@@ -102,7 +112,7 @@ function display() {
     // Placer les marqueurs et remplir la liste de restaurants affichée.
     markers = L.featureGroup().addTo(map); // Groupe de marqueurs
     // On ajoute un marqueur à l'adresse de l'utilisateur
-    L.marker([address.coords.latitude, address.coords.longitude], { icon: iconHome }).addTo(markers);
+    L.marker([address.coordinates.latitude, address.coordinates.longitude], { icon: iconHome }).addTo(markers);
     for (let j = 0; j < restaurants.length; j++) {
         // Remplir la liste
         addToListDisplay(restaurants[j]);

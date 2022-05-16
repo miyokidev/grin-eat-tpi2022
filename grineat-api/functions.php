@@ -16,20 +16,19 @@ function convertAdressToCoordinate($adress)
     $data = json_decode($resp, true);
 
     if (count($data["features"]) != 0) {
-        $adressFound = $latitudeAddr = $data["features"][0]["place_name"];
+        $addressFound = $latitudeAddr = $data["features"][0]["place_name"];
         $latitudeAddr = $data["features"][0]["geometry"]["coordinates"][1];
         $longitudeAddr = $data["features"][0]["geometry"]["coordinates"][0];
 
-        $result["adress"] = $adressFound;
-        $result["latitude"] = $latitudeAddr;
-        $result["longitude"] = $longitudeAddr;
+        $result["street"] = $addressFound;
+        $result["coordinates"]["latitude"] = $latitudeAddr;
+        $result["coordinates"]["longitude"] = $longitudeAddr;
     } else {
         $result = null;
     }
 
 
     return $result;
-
     /*
     $result = array();
 
