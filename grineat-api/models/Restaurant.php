@@ -334,10 +334,20 @@ class Restaurant implements JsonSerializable {
     }
 
     public static function findAll() {
-        $sql = MyPdo::getInstance()->prepare('SELECT * FROM restaurants');
+        $sql = MyPdo::getInstance()->prepare('SELECT * FROM restaurants;');
         $sql->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Restaurant');
         $sql->execute();
         $result = $sql->fetchAll();
+
+        return $result;
+    }
+
+    public function findById() {
+        $sql = MyPdo::getInstance()->prepare('SELECT * FROM restaurants WHERE id = :id;');
+        $sql->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Restaurant');
+        $sql->bindParam(':id', $this->getId());
+        $sql->execute();
+        $result = $sql->fetch();
 
         return $result;
     }

@@ -1,0 +1,421 @@
+* {
+    /*padding: 0;*/
+    margin: 0;
+}
+
+:root {
+    --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --bs-body-font-family: var(--bs-font-sans-serif);
+    --bs-body-font-size: 1rem;
+    --bs-body-font-weight: 400;
+    --bs-body-line-height: 1.5;
+    --bs-white-rgb: 255, 255, 255;
+    --bs-greenBg-rgb: 25, 135, 84;
+}
+
+body {
+    height: 100%;
+    font-family: var(--bs-body-font-family);
+    font-size: var(--bs-body-font-size);
+    font-weight: var(--bs-body-font-weight);
+    line-height: var(--bs-body-line-height);
+    text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-greenBg-rgb), var(--bs-bg-opacity)) !important;
+    box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+    overflow: hidden;
+}
+
+header {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    /* align horizontal */
+    justify-content: center;
+    /* align vertical */
+    align-items: center;
+    user-select: none;
+    flex-wrap: wrap;
+}
+
+header
+
+.header-logo-start {
+    /* align horizontal */
+    justify-content: start;
+}
+
+.header-logo-start h3 {
+    margin-left: 1rem;
+}
+
+#idLogo {
+    position: absolute;
+    left: 10px;
+    cursor: pointer;
+}
+
+.address-display {
+    cursor: pointer;
+}
+
+.shadow-header {
+    box-shadow: 0 4px 2px -2px rgba(0, 0, 0, .2);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 1.75rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.text-white {
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-white-rgb), var(--bs-text-opacity)) !important;
+}
+
+/* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
+@media screen and (min-width: 661px) {
+    .main {
+        height: calc(100vh - (60px + 50px));
+        display: flex;
+        justify-content: center;
+        /* align horizontal */
+        align-items: center;
+        /* align vertical */
+    }
+
+    .search-container {
+        width: 60%;
+        text-align: center !important;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .search-container h3 {
+        font-size: 200%;
+        margin-bottom: 1rem;
+    }
+
+    .btn-search {
+        background-color: rgb(1, 114, 52);
+        border: none;
+        font-weight: 700 !important;
+        padding: .375rem .75rem;
+        border-radius: .25rem;
+        transform: scale(1.25);
+        flex: 0;
+    }
+
+    .mapboxgl-ctrl-geocoder {
+        flex: 1;
+        transform: scale(1.25);
+        min-width: 100%;
+    }
+
+    .main-restaurants {
+        min-width: 100%;
+        height: calc(100vh - (60px + 30px + 50px));
+        display: flex;
+    }
+}
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 660px) {
+    .main {
+        height: calc(100vh - (60px + 50px));
+        display: flex;
+        justify-content: center;
+        /* align horizontal */
+        align-items: center;
+        /* align vertical */
+    }
+
+    .search-container {
+        width: 60%;
+        text-align: center !important;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .search-container h3 {
+        font-size: 150%;
+        margin-bottom: 0.5rem;
+    }
+
+    .btn-search {
+        background-color: rgb(1, 114, 52);
+        border: none;
+        font-weight: 700 !important;
+        padding: .375rem .75rem;
+        border-radius: .25rem;
+        transform: scale(1.25);
+        flex: 0;
+    }
+
+    .mapboxgl-ctrl-geocoder {
+        flex: 1;
+        transform: scale(0.75);
+        width: 300px !important;
+    }
+
+    .main-restaurants {
+        height: calc(100vh - (60px + 30px + 50px));
+        display: flex;
+        flex-wrap: wrap-reverse;
+    }
+
+    .map-container {
+        height: 400px;
+    }
+}
+
+.btn-search:hover {
+    background-color: rgb(0, 189, 85);
+}
+
+.btn-search:enabled {
+    cursor: pointer;
+}
+
+.btn-search:disabled {
+    background-color: #6c757d;
+    opacity: .65;
+    pointer-events: none;
+}
+
+.search-inputs-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px 40px;
+}
+
+footer {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    /* align horizontal */
+    align-items: center;
+    /* align vertical */
+    color: rgba(255, 255, 255, .5) !important;
+}
+
+.tools-container {
+    height: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 30px;
+    display: flex;
+    align-items: center;
+    /* align vertical */
+}
+
+.list-container {
+    flex: 1 1 20%;
+    background-color: white;
+    min-height: 100%;
+    border: solid 2px black;
+}
+
+#idListDisplay {
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.card {
+    width: 100%;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: solid 2px black;
+}
+
+.card img {
+    object-fit: cover;
+    height: 70%;
+    min-width: 100%;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 30%;
+    justify-content: center;
+    align-items: center;
+}
+
+.card p {
+    margin: 5px 0px 5px 0px;
+}
+
+.card button {
+    width: 30%;
+    height: 40%;
+    background-color: #0d6efd;
+    border: none;
+    font-weight: 700 !important;
+    padding: .375rem .75rem;
+    border-radius: .25rem;
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-white-rgb), var(--bs-text-opacity)) !important;
+    cursor: pointer;
+}
+
+.card button:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+.map-container {
+    flex: 1 1 80%;
+    border: solid 2px black;
+    border-left: none;
+}
+
+#map {
+    min-height: 100%;
+}
+
+#idSearchName {
+    font-size: 16px;
+    height: 20px;
+    margin-left: 1rem;
+    padding: 1px 4px 1px 35px;
+    background: transparent url("../images/search.png") no-repeat 8px center;
+    background-size: 20px;
+    background-color: white;
+    border-radius: .50rem;
+}
+
+#idSearchName:focus {
+    outline: none;
+    border: solid 2px;
+    border-color: rgb(1, 114, 52);
+}
+
+#idSelectCategory {
+    font-size: 16px;
+    height: 25px;
+}
+
+/* EDITABLE SELECT */
+
+.select-editable {
+    position: relative;
+    background-color: white;
+    border: solid grey 1px;
+    width: 120px;
+    height: 18px;
+}
+
+.select-editable select {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border: none;
+    font-size: 16px;
+    width: 120px;
+    margin: 0;
+}
+
+.select-editable input {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100px;
+    padding: 1px;
+    font-size: 14px;
+    border: none;
+}
+
+.select-editable select:focus,
+.select-editable input:focus {
+    outline: none;
+}
+
+/* END EDITABLE SELECT */
+
+.main-menus {
+    height: calc(100vh - (60px + 50px));
+    margin-top: 5px;
+}
+
+.restaurant-info-container {
+    width: 100%;
+    height: 40%;
+    display: flex;
+    gap: 100px;
+    flex-wrap: wrap;
+    border-bottom: solid 2px rgb(1, 114, 52);
+    padding: 5px;
+}
+
+.restaurant-info-container img {
+    object-fit: cover;
+    width: 20%;
+    height: 300px;
+}
+ 
+.restaurant-name-city {
+    padding: 1rem;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.restaurant-name-city p {
+    font-size: 1.25rem;
+}
+
+.restaurant-street-number {
+    padding: 1rem;
+    width: auto;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.menu-items-container {
+    height: 60%;
+    overflow-y: scroll;
+    border-bottom: solid 2px rgb(1, 114, 52);
+}
+
+#idListMenuItems {
+    display: flex;
+    justify-content: space-between !important;
+    flex-wrap: wrap;
+}
+
+.card-menu {
+    flex: 1 0 calc(33% - 2rem);
+    max-width: calc(33% - 2rem);
+    background-color: white;
+    z-index: 0;
+    padding: .5rem;
+    margin: 1rem .5rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.card-menu-body {
+    width: 65%;
+}
+
+.card-menu img {
+    width: 35%;
+}
+
+.card-menu-description {
+    font-size: .75rem;
+}
