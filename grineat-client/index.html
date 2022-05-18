@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-100">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,32 +12,24 @@
     <link rel="stylesheet"
         href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css"
         type="text/css">
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="assets/css/style.css" rel="stylesheet" />
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
-
-<body class="d-flex h-100 text-center text-white bg-success">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-        <header class="mb-auto">
-            <div>
-                <h3 id="idLogo" class="logo float-md-start mb-0">Grin<strong>Eat</strong></h3>
-            </div>
-        </header>
-
-        <main class="w-50 px-3">
+<body>
+    <header>
+        <h3 class="text-white">Grin<strong>Eat</strong></h3>
+    </header>
+    <div class="main">
+        <div class="search-container text-white text-center">
             <h3>Faites vous livrer vos plats de votre restaurant favoris directement chez vous grâce à <i>GrinEat</i>.</h3>
-            <div class="input-group mb-3 justify-content-center search-container">
-                <div id="idSearchBarContainer" class="" type="text" class="search-bar-container"></div>
-                <button id="idBtnSearch" class="btn btn-secondary fw-bold text-white btn-search">Chercher</button>
+            <div class="search-inputs-container">
+                <div id="idSearchBarContainer" class=""></div>
+                <button id="idBtnSearch" class="btn-search text-white">Chercher</button>
             </div>
-        </main>
-
-        <footer class="mt-auto text-white-50">
-            <p>&copy; 2022 GrinEat, developped by <a href="https://github.com/miyokidev" class="text-white">@miyokidev</a>.</p>
-        </footer>
+        </div>
     </div>
-    <script src="js/main.js"></script>
+    <footer>
+        <p>&copy; 2022 GrinEat, developped by <a href="https://github.com/miyokidev" class="text-white">@miyokidev</a>.</p>
+    </footer>
+    <script src="./assets/js/main.js"></script>
 </body>
-
 </html>

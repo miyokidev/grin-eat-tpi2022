@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: May 12, 2022 at 07:20 AM
--- Server version: 10.7.3-MariaDB
--- PHP Version: 7.4.28
+-- Hôte : localhost
+-- Généré le : mer. 18 mai 2022 à 16:24
+-- Version du serveur : 10.3.32-MariaDB-0ubuntu0.20.04.1
+-- Version de PHP : 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_grineat`
+-- Base de données : `db_grineat`
 --
 CREATE DATABASE IF NOT EXISTS `db_grineat` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE `db_grineat`;
@@ -26,7 +26,7 @@ USE `db_grineat`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Structure de la table `categories`
 --
 
 CREATE TABLE `categories` (
@@ -36,7 +36,7 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `categories`
+-- Déchargement des données de la table `categories`
 --
 
 INSERT INTO `categories` (`id`, `nameEnglish`, `nameFrench`) VALUES
@@ -49,7 +49,7 @@ INSERT INTO `categories` (`id`, `nameEnglish`, `nameFrench`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `countries`
+-- Structure de la table `countries`
 --
 
 CREATE TABLE `countries` (
@@ -59,7 +59,7 @@ CREATE TABLE `countries` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `countries`
+-- Déchargement des données de la table `countries`
 --
 
 INSERT INTO `countries` (`id`, `nameEnglish`, `nameFrench`) VALUES
@@ -317,7 +317,7 @@ INSERT INTO `countries` (`id`, `nameEnglish`, `nameFrench`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `menu_items`
+-- Structure de la table `menu_items`
 --
 
 CREATE TABLE `menu_items` (
@@ -330,7 +330,7 @@ CREATE TABLE `menu_items` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `menu_items`
+-- Déchargement des données de la table `menu_items`
 --
 
 INSERT INTO `menu_items` (`id`, `restaurantId`, `name`, `description`, `image`, `price`) VALUES
@@ -340,7 +340,7 @@ INSERT INTO `menu_items` (`id`, `restaurantId`, `name`, `description`, `image`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `restaurants`
+-- Structure de la table `restaurants`
 --
 
 CREATE TABLE `restaurants` (
@@ -360,17 +360,17 @@ CREATE TABLE `restaurants` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `restaurants`
+-- Déchargement des données de la table `restaurants`
 --
 
 INSERT INTO `restaurants` (`id`, `createdOn`, `email`, `name`, `phone`, `website`, `image`, `street`, `cp`, `city`, `countryId`, `latitude`, `longitude`) VALUES
-(1, '2022-05-03 15:29:30', 'support.mcdonalds@stuart.com', 'McDonald’s', '+41 22 796 88 00', NULL, 'https://lh5.googleusercontent.com/p/AF1QipMHX9lRpMskD-cAPt2PUVN-jsED8q5u9NLMkmib=w80-h106-k-no', 'Rte du Bois-des-Frères 40', '1219', 'Le Lignon', 179, '46.2059684', '6.0987860'),
+(1, '2022-05-03 15:29:30', 'support.mcdonalds@stuart.com', 'McDonald’s du Lignon', '+41 22 796 88 00', NULL, 'https://lh5.googleusercontent.com/p/AF1QipMHX9lRpMskD-cAPt2PUVN-jsED8q5u9NLMkmib=w80-h106-k-no', 'Rte du Bois-des-Frères 40', '1219', 'Le Lignon', 179, '46.2059684', '6.0987860'),
 (2, '2022-05-04 22:33:48', NULL, 'Le Tilleul', '+41 22 752 66 70', 'http://www.letilleul.ch/home.html', 'https://lh5.googleusercontent.com/p/AF1QipN0PwXFMHuV1Fdty1q8glnKpyJ4WLtpf06mCK5y=w80-h142-k-no', 'Rte de La-Repentance 86', '1252', ' Meinier', 179, '46.2479151', '6.2323470'),
 (3, '2022-05-10 13:57:14', NULL, 'Auberge de Vandoeuvres', '+41 22 810 89 89', 'http://www.aubergedevandoeuvres.ch/', 'https://lh5.googleusercontent.com/p/AF1QipNss5ciZjhOkeuOG8gxr4i_IINhvYZwL7TytTAz=w137-h92-k-no', 'Rte de Choulex 2', '1254', 'Vandoeuvres', 179, '46.2212424', '6.2029113'),
 (4, '2022-05-10 13:59:20', NULL, 'Café des Amis', '+41 22 750 13 39', 'https://cafe-des-amis.ch/', 'https://lh5.googleusercontent.com/p/AF1QipPhnAczhBfPNTS5_YAI9CyB7FLxvhJbOsLkx7MV=w163-h92-k-no', 'Rte de Choulex 132', '1244', 'Choulex', 179, '46.2239146', '6.2252661'),
 (5, '2022-05-10 14:03:46', NULL, 'Auberge des Vieux-Chênes', '+41 22 759 12 07', 'https://auberge-vieux-chenes.ch/', 'https://lh5.googleusercontent.com/p/AF1QipNQ1iXwJLP3Rao2-iULJvmDtzmfu2biFag3MLxm=w163-h92-k-no', 'Rte de Presinge 121', '1243', 'Presinge', 179, '46.2195149', '6.2530531'),
 (6, '2022-05-10 14:08:34', NULL, 'le Bistro de Cologny', '+41 22 736 57 80', 'https://yellow.local.ch/d/JiQYplXTnOec9cGBMtLu9A', 'https://lh5.googleusercontent.com/p/AF1QipN-dgvIWI1DSBjo3RwXrH2xWnyfrVIqJsc0JcIE=w80-h106-k-no', 'Pl. Pierre-Gautier 5', '1223', 'Cologny', 179, '46.2160894', '6.1807683'),
-(7, '2022-05-10 15:14:53', NULL, 'Auberge de la Mairie', '+41 412 341 31 75', 'http://www.mairie.ch/', 'https://lh5.googleusercontent.com/p/AF1QipOBufz-NbUMeW2YPdz3oePFM6vbN_zt4NvIJcsn=w80-h164-k-no', 'Rue du Village 13', '1214', 'Vernier', 179, '46.2147933', '6.0839579'),
+(7, '2022-05-10 15:14:53', NULL, 'Auberge de la Mairie', '+41 22 341 31 75', 'http://www.mairie.ch/', 'https://lh5.googleusercontent.com/p/AF1QipOBufz-NbUMeW2YPdz3oePFM6vbN_zt4NvIJcsn=w80-h164-k-no', 'Rue du Village 13', '1214', 'Vernier', 179, '46.2147933', '6.0839579'),
 (8, '2022-05-10 15:18:41', NULL, 'Café-Restaurant du Cercle', '+41 22 796 82 00', 'https://restaurantducercle.wixsite.com/pizzeria', 'https://lh5.googleusercontent.com/p/AF1QipNgj0XcOq3-aa-HYjMazNduF4PFD2Ng5isCPtWT=w122-h92-k-no', 'Rte D\'Aïre 160', '1219', 'Aïre', 179, '46.2025826', '6.1054076'),
 (9, '2022-05-10 15:20:20', NULL, 'Restaurant Da Toni', '+41 22 797 00 77', NULL, 'https://lh5.googleusercontent.com/p/AF1QipPdwruWrmUQxelaPUPhToN-ZIGuFxW-7g6YV5wY=w163-h92-k-no', 'Pl. du Lignon 4', '1219', 'Vernier', 179, '46.2043989', '6.0972502'),
 (10, '2022-05-11 14:52:22', NULL, 'Doppiozero restaurant pizzeria', '+41 22 940 37 17', 'http://www.doppiozerorestaurant.ch/', 'https://lh5.googleusercontent.com/p/AF1QipO2MeCN35MN9VNXfKBl3cOU99QrDrK0NeS_dJW0=w163-h92-k-no', 'Chem. du Château-Bloch 11', '1219', 'Aïre', 179, '46.2062769', '6.1024415'),
@@ -378,12 +378,13 @@ INSERT INTO `restaurants` (`id`, `createdOn`, `email`, `name`, `phone`, `website
 (12, '2022-05-11 14:56:51', NULL, 'Taverne du Valais', '+41 22 796 23 23', 'http://www.taverneduvalais.ch/', 'https://lh5.googleusercontent.com/p/AF1QipMrlInvran5FajRY7ynOCdnnJ5m1eNPUqo6lVw=w92-h92-k-no', 'Chem. Des Sellières 4', '1219', 'Le Lignon', 179, '46.2005881', '6.1028570'),
 (13, '2022-05-11 14:58:42', NULL, 'Brasserie du Lignon', '+41 22 796 41 44', 'https://brasserie-lignon.ch/', 'https://lh5.googleusercontent.com/p/AF1QipPwNrPSUWPffx9z061Y-ZX_Q6JtMYEZiHrCxM2p=w122-h92-k-no', 'Pl. du Lignon 10', '1219', 'Vernier', 179, '46.2032840', '6.0956820'),
 (14, '2022-05-11 15:29:59', NULL, 'Restaurant Le Commerce', '+33 4 50 49 20 96', 'http://pizzeria-grill-le-commerce.com/', 'https://lh5.googleusercontent.com/p/AF1QipP-DpFudRedTSAfkHGCo0gz6DzcyZbIn6V3Ygp9=w80-h106-k-no', '4 Rue Berthollet', '74160', 'Saint-Julien-en-Genevois', 72, '46.1441545', '6.0822197'),
-(15, '2022-05-12 07:44:40', NULL, 'PizzaLand 10', '+41 22 320 81 90', 'http://www.pizzaland10.ch/', 'https://lh5.googleusercontent.com/p/AF1QipM8p05AXBPAYvzw2FIsWy4EHVnAoP9G3NV62SBL=w408-h544-k-no', 'Rue de Carouge 73', '1205', 'Genève', 179, '46.1903163', '6.1425983');
+(15, '2022-05-12 07:44:40', NULL, 'PizzaLand 10', '+41 22 320 81 90', 'http://www.pizzaland10.ch/', 'https://lh5.googleusercontent.com/p/AF1QipM8p05AXBPAYvzw2FIsWy4EHVnAoP9G3NV62SBL=w408-h544-k-no', 'Rue de Carouge 73', '1205', 'Genève', 179, '46.1902230', '6.1437010'),
+(16, '2022-05-17 11:25:47', 'inglewood.burgers@gmail.com', 'Inglewood Plainpalais', '+41 22 320 38 66', 'http://www.inglewood.ch/', 'https://lh5.googleusercontent.com/p/AF1QipNl3XYh8MMr7QNKzoSWkhGzP77dQoo4gHi9uGqW=w408-h271-k-no', 'Bd du Pont-d\'Arve 44', '1205', 'Genève', 179, '46.1941000', '6.1402350');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `restaurants_categories`
+-- Structure de la table `restaurants_categories`
 --
 
 CREATE TABLE `restaurants_categories` (
@@ -392,7 +393,7 @@ CREATE TABLE `restaurants_categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `restaurants_categories`
+-- Déchargement des données de la table `restaurants_categories`
 --
 
 INSERT INTO `restaurants_categories` (`restaurantId`, `categoryId`) VALUES
@@ -402,39 +403,39 @@ INSERT INTO `restaurants_categories` (`restaurantId`, `categoryId`) VALUES
 (10, 2);
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `categories`
+-- Index pour la table `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`nameEnglish`);
 
 --
--- Indexes for table `countries`
+-- Index pour la table `countries`
 --
 ALTER TABLE `countries`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`nameEnglish`);
 
 --
--- Indexes for table `menu_items`
+-- Index pour la table `menu_items`
 --
 ALTER TABLE `menu_items`
   ADD PRIMARY KEY (`id`),
   ADD KEY `restaurantId` (`restaurantId`);
 
 --
--- Indexes for table `restaurants`
+-- Index pour la table `restaurants`
 --
 ALTER TABLE `restaurants`
   ADD PRIMARY KEY (`id`),
   ADD KEY `idCountry` (`countryId`);
 
 --
--- Indexes for table `restaurants_categories`
+-- Index pour la table `restaurants_categories`
 --
 ALTER TABLE `restaurants_categories`
   ADD PRIMARY KEY (`restaurantId`,`categoryId`),
@@ -442,51 +443,51 @@ ALTER TABLE `restaurants_categories`
   ADD KEY `categoryId` (`categoryId`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `categories`
+-- AUTO_INCREMENT pour la table `categories`
 --
 ALTER TABLE `categories`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `countries`
+-- AUTO_INCREMENT pour la table `countries`
 --
 ALTER TABLE `countries`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=501;
 
 --
--- AUTO_INCREMENT for table `menu_items`
+-- AUTO_INCREMENT pour la table `menu_items`
 --
 ALTER TABLE `menu_items`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `restaurants`
+-- AUTO_INCREMENT pour la table `restaurants`
 --
 ALTER TABLE `restaurants`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `menu_items`
+-- Contraintes pour la table `menu_items`
 --
 ALTER TABLE `menu_items`
   ADD CONSTRAINT `menu_items_ibfk_1` FOREIGN KEY (`restaurantId`) REFERENCES `restaurants` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `restaurants`
+-- Contraintes pour la table `restaurants`
 --
 ALTER TABLE `restaurants`
   ADD CONSTRAINT `restaurants_ibfk_1` FOREIGN KEY (`countryId`) REFERENCES `countries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `restaurants_categories`
+-- Contraintes pour la table `restaurants_categories`
 --
 ALTER TABLE `restaurants_categories`
   ADD CONSTRAINT `restaurants_categories_ibfk_1` FOREIGN KEY (`restaurantId`) REFERENCES `restaurants` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,

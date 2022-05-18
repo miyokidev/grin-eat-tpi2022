@@ -1,7 +1,19 @@
+/*
+     /\   /\ 
+    //\\_//\\    ____
+    \_     _/   /   /   Nom et Prénom: GRIN Brian
+    / * * \    /^^^]    Enseignant : Monsieur Antoine Schmid    
+    \_\O/_/    [   ]    Classe : I.DA-P4B
+     /   \_    [   /    Date : 18.05.2022
+     \     \_  /  /     Nom du projet : GrinEat-Server-Node
+      [ [ /  \/ _/      Version du projet : 0.1
+     _[ [ \  /_/        Cours : TPI
+              
+*/
+
 const axios = require('axios').default;
 
 async function convertAdressToCoordoninate(adress) {
-    /*
     return new Promise((resolve, reject) => {
         encoded = encodeURIComponent(adress);
 
@@ -17,15 +29,6 @@ async function convertAdressToCoordoninate(adress) {
                 console.table(error);
                 reject("Invalid adress");
             });
-    });
-    */
-
-    return new Promise((resolve, reject) => {
-        resolve({
-            adress: "Quai Capo D'istria 9, 1205 Genève, Switzerland",
-            latitude: 46.187687,
-            longitude: 6.143453
-        });
     });
 }
 

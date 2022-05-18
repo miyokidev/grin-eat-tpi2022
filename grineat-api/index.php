@@ -1,4 +1,17 @@
 <?php
+/*
+     /\   /\ 
+    //\\_//\\    ____
+    \_     _/   /   /   Nom et Prénom: GRIN Brian
+    / * * \    /^^^]    Enseignant : Monsieur Antoine Schmid    
+    \_\O/_/    [   ]    Classe : I.DA-P4B
+     /   \_    [   /    Date : 18.05.2022
+     \     \_  /  /     Nom du projet : GrinEat-API
+      [ [ /  \/ _/      Version du projet : 1.0
+     _[ [ \  /_/        Cours : TPI
+              
+*/
+
 // Include CORS headers
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
@@ -6,7 +19,7 @@ header('Access-Control-Allow-Headers: X-Requested-With');
 header('Content-Type: application/json');
 
 // Include Models & functions
-include "functions.php";
+include "functions.inc.php";
 include "models/MyPdo.php";
 include "models/Category.php";
 include "models/Restaurant.php";
@@ -35,7 +48,7 @@ switch ($endpoint) {
             case '':
                 include "controllers/restaurantsController.php";
                 break;
-            case 'menu':
+            case 'menus':
                 include "controllers/menu_itemsController.php";
                 break;
             default:

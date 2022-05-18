@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-100">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -13,54 +13,49 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="assets/css/style.css" rel="stylesheet" />
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
-<body class="d-flex h-100 text-center text-white bg-success">
-    <div class="d-flex w-100 h-100 mx-auto flex-column">
-        <header class="header-container shadow-sm p-2 mb-auto w-100">
-            <div>
-                <h3 id="idLogo" class="logo float-md-start mb-0">Grin<strong>Eat</strong></h3>
-            </div>
-            <p id="idAddress" class="address-display">address</p>
-        </header>
-
-        <div class="tools-container">
-            <input id="idSearchName" type="text" class="" onchange="">
+<body>
+    <header class="text-white shadow-header">
+        <h3 id="idLogo">Grin<strong>Eat</strong></h3>
+        <p id="idAddress" class="address-display">address</p>
+    </header>
+    <div class="tools-container">
+        <input id="idSearchName" type="text" placeholder="Restaurants">
+        <div>
+            <label for="idSlectCategory" class="text-white">Catégories: </label>
             <select id="idSelectCategory" onchange="categoryChanged(); changed()">
                 <option value=""></option>
             </select>
-            <div class="select-editable">
-                <select id="idSelectRadius" onchange="this.nextElementSibling.value=this.value; radiusChanged(); changed();">
-                    <option value="1 km">1 km</option>
-                    <option value="3 km">3 km</option>
-                    <option value="5 km" selected>5 km</option>
-                    <option value="8 km">8 km</option>
-                    <option value="10 km">10 km</option>
-                    <option value="20 km">20 km</option>
-                </select>
-                <input id="idInputRadius" type="text" name="format" value="5 km" onchange="radiusChanged(); changed();" />
-            </div>
+        </div>
+        <div class="select-editable">
+            <select id="idSelectRadius"
+                onchange="this.nextElementSibling.value=this.value; radiusChanged(); changed();">
+                <option value="1 km">1 km</option>
+                <option value="3 km">3 km</option>
+                <option value="5 km" selected>5 km</option>
+                <option value="8 km">8 km</option>
+                <option value="10 km">10 km</option>
+                <option value="20 km">20 km</option>
+            </select>
+            <input id="idInputRadius" type="text" name="format" value="5 km" onchange="radiusChanged(); changed();" />
+        </div>
+    </div>
+    <div class="main-restaurants">
+        <div class="list-container">
+            <div id="idListDisplay"></div>
         </div>
 
-        <main class="main-container">
-            <div class="list-container h-100">
-                <div id="idListDisplay"></div>
-            </div>
-
-            <div class="map-container">
-                <div id="map" class="h-100"></div>
-            </div>
-        </main>
-
-        <footer class="footer-container mt-auto text-white-50 p-4">
-            <p>&copy; 2022 GrinEat, developped by <a href="https://github.com/miyokidev"
-                    class="text-white">@miyokidev</a>.</p>
-        </footer>
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
     </div>
-    <script src="js/restaurants.js"></script>
+    <footer>
+        <p>&copy; 2022 GrinEat, developped by <a href="https://github.com/miyokidev" class="text-white">@miyokidev</a>.
+        </p>
+    </footer>
+    <script src="./assets/js/restaurants.js"></script>
 </body>
 
 </html>
